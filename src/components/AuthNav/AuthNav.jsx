@@ -10,10 +10,10 @@ export default function AuthNav() {
   return (
     <div className={css.div}>
       <NavLink className={isActive} to="/register">
-        Registration
+        Register
       </NavLink>
       <NavLink className={isActive} to="/login">
-        Log in
+        Log In
       </NavLink>
     </div>
   );

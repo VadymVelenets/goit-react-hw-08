@@ -3,11 +3,10 @@
   gap: 12px;
   justify-content: space-between;
   padding: 10px 20px;
-  border-bottom: solid 1px rgb(209, 209, 209);
+  border-bottom: 1px solid #2a363b;
   align-items: center;
 }
 
 .title {
   text-align: center;
-  margin-bottom: 30px;
 }

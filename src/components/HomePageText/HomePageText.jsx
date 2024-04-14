@@ -8,11 +8,10 @@ export default function HomePageText() {
   return (
     <div className={css.text}>
       <p>
-        Hello, {isLoginned ? <span className={css.textAccent}>{user.name}</span> : <>user</>} ! Our web application
-        offers a convenient way to store and manage your phone contacts securely. With our platform, you can keep all
-        your contact information private and accessible only to you. Easily add, edit, and delete contacts as needed,
-        ensuring that your personal information remains confidential. Experience peace of mind knowing that your
-        contacts are safely stored and organized with our user-friendly interface. <br />
+        Hello, {isLoginned ? <span className={css.textAccent}>{user.name}</span> : <>user</>} ! Our contacts app is a
+        simple and effective tool to manage all your contacts in one place. Easily add, edit, and delete contacts, and
+        quickly find the contact you need using search and filter functions.
+        <br />
         {isLoginned && <span className={css.textAccent}>Enjoy your use!</span>}
       </p>
     </div>

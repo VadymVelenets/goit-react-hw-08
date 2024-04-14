@@ -1,13 +1,12 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: rgb(211, 211, 211);
 }
 button {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(253, 253, 253);
 }
 
 .linkLogin {
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(255, 255, 255);
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -43,5 +42,5 @@ a {
 
 a:hover,
 a:focus {
-  color: rgb(180, 158, 200);
+  color: rgb(0, 95, 184);
 }
