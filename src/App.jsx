@@ -1,35 +1,67 @@
 import "./App.css";
-import ContactList from "./components/ContactList/ContactList";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactForm from "./components/ContactForm/ContactForm";
-import { fetchContacts } from "./redux/contactsOps";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectError, selectLoading } from "./redux/contactsSlice";
-import toast, { Toaster } from "react-hot-toast";
+import { refreshUser } from "./redux/auth/operations";
+import { selectRefreshing } from "./redux/auth/selectors";
+import { RestrictedRoute } from "./components/RestrictedRoute";
+import { PrivateRoute } from "./components/PrivateRoute";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import Contacts from "./pages/Contacts";
+import Layout from "./components/Layout/Layout";
 
 function App() {
+  const isRefreshing = useSelector(selectRefreshing);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchContacts())
-      .unwrap()
-      .catch((e) => {
-        toast.error("Sorry, we were unable to access your contact list...");
-        console.log(e);
-      });
-  }, [dispatch]);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
 
-  return (
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <h3 className="load">Loading...</h3>
+  ) : (
     <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
+      <Layout>
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Routes>
+            <Route path="/" element={<Home></Home>}></Route>
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  component={<Registration />}
+                  redirectTo="/contacts"
+                ></RestrictedRoute>
+              }
+            ></Route>
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute component={<Login />} redirectTo="/contacts" />
+              }
+            ></Route>
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute
+                  component={<Contacts />}
+                  redirectTo="/login"
+                ></PrivateRoute>
+              }
+            ></Route>
+          </Routes>
+        </Suspense>
+      </Layout>
+
+      {/* <ContactForm />
       <SearchBox />
       {loading && <p>Loading...</p>}
-      {error && <p>Something went wrong! Please try again</p>}
+      {error && <p>Something went wrong! Please try again.</p>}
       <ContactList />
-      <Toaster position="bottom-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} /> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import css from "./Contact.module.css";
 import { ImAddressBook } from "react-icons/im";
 import { ImPhone } from "react-icons/im";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
+import { deleteContact } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
 
 export default function Contact({ data }) {
